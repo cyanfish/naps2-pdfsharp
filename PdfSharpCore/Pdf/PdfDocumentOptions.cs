@@ -1,4 +1,5 @@
 #region PDFsharp - A .NET library for processing PDF
+
 //
 // Authors:
 //   Stefan Lange
@@ -25,6 +26,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
+
 #endregion
 
 // ReSharper disable ConvertToAutoProperty
@@ -50,6 +52,7 @@ namespace PdfSharpCore.Pdf
             get { return _colorMode; }
             set { _colorMode = value; }
         }
+
         PdfColorMode _colorMode = PdfColorMode.Rgb;
 
         /// <summary>
@@ -74,6 +77,7 @@ namespace PdfSharpCore.Pdf
             get { return _noCompression; }
             set { _noCompression = value; }
         }
+
         bool _noCompression;
 
         /// <summary>
@@ -84,6 +88,7 @@ namespace PdfSharpCore.Pdf
             get { return _flateEncodeMode; }
             set { _flateEncodeMode = value; }
         }
+
         PdfFlateEncodeMode _flateEncodeMode = PdfFlateEncodeMode.Default;
 
         /// <summary>
@@ -96,7 +101,23 @@ namespace PdfSharpCore.Pdf
             get { return _enableCcittCompressionForBilevelImages; }
             set { _enableCcittCompressionForBilevelImages = value; }
         }
+
         bool _enableCcittCompressionForBilevelImages = false;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to try lossless JBIG2 compression for bilevel images.
+        /// With true, PDFsharp will also try JBIG2 and use it if it creates the smallest output.
+        /// JBIG2 requires PDF 1.4 or higher, so it is only used if the document version is at least 1.4.
+        ///
+        /// Experimental: Enable at your own risk.
+        /// </summary>
+        public bool EnableJbig2CompressionForBilevelImages
+        {
+            get { return _enableJbig2CompressionForBilevelImages; }
+            set { _enableJbig2CompressionForBilevelImages = value; }
+        }
+
+        bool _enableJbig2CompressionForBilevelImages = false;
 
         /// <summary>
         /// Gets or sets a value indicating whether to compress JPEG images with the FlateDecode filter.
@@ -106,6 +127,7 @@ namespace PdfSharpCore.Pdf
             get { return _useFlateDecoderForJpegImages; }
             set { _useFlateDecoderForJpegImages = value; }
         }
+
         PdfUseFlateDecoderForJpegImages _useFlateDecoderForJpegImages = PdfUseFlateDecoderForJpegImages.Never;
     }
 }

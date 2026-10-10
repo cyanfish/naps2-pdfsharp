@@ -37,7 +37,7 @@ using PdfSharpCore.Pdf.Advanced;
 // ReSharper disable RedundantNameQualifier
 // ReSharper disable UseNameofExpression
 
-namespace PdfSharpCore.Drawing  // #??? aufr‰umen
+namespace PdfSharpCore.Drawing  // #??? aufr√§umen
 {
     /// <summary>
     /// Holds information about the current state of the XGraphics object.
@@ -535,7 +535,7 @@ namespace PdfSharpCore.Drawing  // #??? aufr‰umen
 
         // ----- DrawBezier ---------------------------------------------------------------------------
         /// <summary>
-        /// Draws a BÈzier spline defined by four points.
+        /// Draws a B√©zier spline defined by four points.
         /// </summary>
         public void DrawBezier(XPen pen, XPoint pt1, XPoint pt2, XPoint pt3, XPoint pt4)
         {
@@ -543,7 +543,7 @@ namespace PdfSharpCore.Drawing  // #??? aufr‰umen
         }
 
         /// <summary>
-        /// Draws a BÈzier spline defined by four points.
+        /// Draws a B√©zier spline defined by four points.
         /// </summary>
         public void DrawBezier(XPen pen, double x1, double y1, double x2, double y2,
           double x3, double y3, double x4, double y4)
@@ -559,7 +559,7 @@ namespace PdfSharpCore.Drawing  // #??? aufr‰umen
         // ----- DrawBeziers --------------------------------------------------------------------------
 
         /// <summary>
-        /// Draws a series of BÈzier splines from an array of points.
+        /// Draws a series of B√©zier splines from an array of points.
         /// </summary>
         public void DrawBeziers(XPen pen, XPoint[] points)
         {

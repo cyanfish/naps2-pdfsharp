@@ -489,6 +489,14 @@ namespace PdfSharpCore.Pdf.Advanced
                     }
                 }
 
+                byte[] imageDataJbig2 = null;
+                if (bits == 1 && isBitonal > 0 && firstMaskColor == -1 && pdfVersion >= 14 &&
+                    _document.Options.EnableJbig2CompressionForBilevelImages)
+                {
+                    // imageData has 1 = white (DeviceGray), while JBIG2Decode delivers 0 = black
+                    imageDataJbig2 = Jbig2Encoder.EncodeGenericRegion(imageData, width, height, (width + 7) / 8, false);
+                }
+
                 FlateDecode fd = new FlateDecode();
                 if (firstMaskColor != -1 &&
                   lastMaskColor != -1)
@@ -525,8 +533,20 @@ namespace PdfSharpCore.Pdf.Advanced
                 byte[] imageDataCompressed = fd.Encode(imageData, _document.Options.FlateEncodeMode);
                 byte[] imageDataFaxCompressed = isFaxEncoding ? fd.Encode(imageDataFax, _document.Options.FlateEncodeMode) : null;
 
+                int smallestNonJbig2Length = imageDataCompressed.Length;
+                if (isFaxEncoding)
+                    smallestNonJbig2Length = Math.Min(smallestNonJbig2Length,
+                        Math.Min(imageDataFax.Length, imageDataFaxCompressed.Length));
+
                 bool usesCcittEncoding = false;
-                if (isFaxEncoding &&
+                if (imageDataJbig2 != null && imageDataJbig2.Length < smallestNonJbig2Length)
+                {
+                    // /JBIG2Decode creates the smallest file
+                    Stream = new PdfStream(imageDataJbig2, this);
+                    Elements[PdfStream.Keys.Length] = new PdfInteger(imageDataJbig2.Length);
+                    Elements[PdfStream.Keys.Filter] = new PdfName("/JBIG2Decode");
+                }
+                else if (isFaxEncoding &&
                   (imageDataFax.Length < imageDataCompressed.Length ||
                   imageDataFaxCompressed.Length < imageDataCompressed.Length))
                 {

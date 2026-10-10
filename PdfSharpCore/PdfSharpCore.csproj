@@ -13,7 +13,7 @@
     <Title>NAPS2.PdfSharp</Title>
     <Product>NAPS2.PdfSharp</Product>
     <PackageTags>naps2 pdfsharp</PackageTags>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -49,6 +49,10 @@
 
   <ItemGroup>
     <None Include="..\LICENCE.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="PdfSharpCore.Test" />
   </ItemGroup>
 
 </Project>
